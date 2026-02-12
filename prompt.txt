@@ -1,0 +1,6 @@
+Return ONLY raw TSX code. Nothing More. No markdown. No backticks. No explanations.
+Don't edit or read files, just take the information in this prompt and return the tsx code.
+
+Next.js page.tsx with "use client". Tailwind CSS only. No external deps.
+
+%s

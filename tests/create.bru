@@ -1,0 +1,22 @@
+meta {
+  name: create
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/create
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "company_info": "Juca Viagens é uma marca/consultoria de viagens brasileira com tom informal, entusiasta e inspirador, que oferece planejamento personalizado e completo de viagens (passagens, hospedagem, passeios, seguro) para um público de 25-55 anos — jovens aventureiros, casais, famílias e profissionais — que sonha em viajar mas se sente sobrecarregado pela complexidade, burocracia e falta de tempo para planejar, posicionando-se como quem 'transforma sonhos em realidade sem complicações' através de roteiros sob medida, suporte constante, segurança e melhor custo-benefício, com comunicação focada em narrativas inspiradoras, dicas práticas, CTAs diretos e prova social, e uma landing page estruturada com hero section, seção de dores/soluções, processo simplificado ('conte seu sonho → roteiro personalizado → planejamento completo → aproveite'), depoimentos de clientes e formulário de orçamento gratuito."
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
