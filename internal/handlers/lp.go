@@ -30,7 +30,7 @@ func CreateLandingPage(ctx *gin.Context) {
 	if err != nil {
 		errMsg := err.Error()
 		ctx.JSON(500, LPResponse{
-			Message: "Error deploying on vercel",
+			Message: "Error creating landing page",
 			Error:   &errMsg,
 		})
 		return

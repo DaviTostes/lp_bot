@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	"lp_bot/internal/gen"
 	"lp_bot/internal/vercel"
 	"lp_bot/pkg/utils"
@@ -11,19 +12,26 @@ import (
 )
 
 func CreateDeployLP(companyInfo string) (string, error) {
-	output, err := gen.GenLP(companyInfo)
+	templateDir := "./template"
+
+	err := os.WriteFile(templateDir+"/app/page.tsx", []byte(""), 0744)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("Error clearing page.tsx file: %s", err)
 	}
 
-	err = os.WriteFile("template/app/page.tsx", utils.TrimBullshit(output), 0644)
-	if err != nil {
-		return "", err
+	if _, err := gen.GenLP(companyInfo, templateDir); err != nil {
+		return "", fmt.Errorf("Error generating lp content: %s", err)
 	}
 
-	url, err := vercel.Deploy("./template")
+	runCmd := exec.Command("npm", "run", "build")
+	runCmd.Dir = templateDir
+	if err := runCmd.Run(); err != nil {
+		return "", fmt.Errorf("Error trying to build lp: %s", err)
+	}
+
+	url, err := vercel.Deploy(templateDir)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("Error trying to deploy lp: %s", err)
 	}
 
 	return url, nil
