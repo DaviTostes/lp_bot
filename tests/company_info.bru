@@ -1,0 +1,22 @@
+meta {
+  name: company_info
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/company
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "company_url": "https://www.instagram.com/chalesaomiguel/H"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
